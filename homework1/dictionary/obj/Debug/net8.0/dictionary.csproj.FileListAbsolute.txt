@@ -1,0 +1,15 @@
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\bin\Debug\net8.0\dictionary.exe
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\bin\Debug\net8.0\dictionary.deps.json
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\bin\Debug\net8.0\dictionary.runtimeconfig.json
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\bin\Debug\net8.0\dictionary.dll
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\bin\Debug\net8.0\dictionary.pdb
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.AssemblyInfoInputs.cache
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.AssemblyInfo.cs
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.csproj.CoreCompileInputs.cache
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.sourcelink.json
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.dll
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\refint\dictionary.dll
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.pdb
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\dictionary.genruntimeconfig.cache
+C:\Users\Jaskuen\Documents\GitHub\travelline_practice\homework1\dictionary\obj\Debug\net8.0\ref\dictionary.dll
