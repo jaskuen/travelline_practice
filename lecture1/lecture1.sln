@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practics0314", "Practics0314\Practics0314.csproj", "{1297E3A7-3FBA-4483-9DF8-0F166035394C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{F7B7CB62-CACD-4FF7-ACC8-0C66791C0305}"
+	ProjectSection(SolutionItems) = preProject
+		StrInterpolation.cs = StrInterpolation.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino", "Casino\Casino.csproj", "{8755FC2E-098D-4D2A-A905-1F8B21AF6E9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1297E3A7-3FBA-4483-9DF8-0F166035394C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1297E3A7-3FBA-4483-9DF8-0F166035394C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1297E3A7-3FBA-4483-9DF8-0F166035394C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1297E3A7-3FBA-4483-9DF8-0F166035394C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8755FC2E-098D-4D2A-A905-1F8B21AF6E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8755FC2E-098D-4D2A-A905-1F8B21AF6E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8755FC2E-098D-4D2A-A905-1F8B21AF6E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8755FC2E-098D-4D2A-A905-1F8B21AF6E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A284BBF-889F-434A-A71B-C5CD7F12059F}
+	EndGlobalSection
+EndGlobal
