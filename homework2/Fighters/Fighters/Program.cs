@@ -14,14 +14,14 @@ namespace Fighters
         private Fighter CreateFighter(string name)
         {
             Choose choice = new Choose();
-            IRace race = choice.Race();
-            IClass _class = choice.Class();
+            IRace race = new Races().List.ElementAt(choice.ChooseItem("race"));
+            IClass _class = new Classes().List.ElementAt(choice.ChooseItem("class"));
             int level = choice.Level();
-            IWeapon weapon = choice.Weapon();
-            IArmor armor = choice.Armor();
+            IWeapon weapon = new Weapons().List.ElementAt(choice.ChooseItem("weapon"));
+            IArmor armor = new Armors().List.ElementAt(choice.ChooseItem("armor"));
             return new Fighter(name, race, _class, level, weapon, armor);
         }
-        public List<Fighter> getFighters()
+        public List<Fighter> ReadFighters()
         {
             List<Fighter> fighters = new List<Fighter>();
             Console.WriteLine("Enter number of fighters:");
@@ -45,7 +45,7 @@ namespace Fighters
             list[index1] = list[index2];
             list[index2] = temp;
         }
-        static void SortFightersArrByInitiative(this List<Fighter> fighters)
+        static void SortFightersByInitiative(this List<Fighter> fighters)
         {
             for (int i = 0; i < fighters.Count(); i++)
             {
@@ -70,11 +70,11 @@ namespace Fighters
         }
         public static void Main()
         {
-            List<Fighter> fighters = new GetData().getFighters();
+            List<Fighter> fighters = new GetData().ReadFighters();
             var master = new GameMaster();
             Console.Clear();
 
-            fighters.SortFightersArrByInitiative();
+            fighters.SortFightersByInitiative();
 
             var winner = master.PlayAndGetWinner(fighters);
 
@@ -104,14 +104,18 @@ namespace Fighters
                         $"\nWho do you want to attack? Choose the opponent:");
                         for (int j = 0; j < fighters.Count(); j++)
                         {
-                            string isYou = (j == i) ? " (Your character)" : "";
-                            string isDead = (fighters[j].Dead) ? " (DEAD)" : "";
+                            string yourCharacter = (j == i) ? " (Your character)" : "";
+                            string deadCharacter = (fighters[j].Dead) ? " (DEAD)" : "";
                             
-                            Console.WriteLine($"   {j + 1}. {fighters[j].Name} (AC {fighters[j].Armor.Armor}) {isYou + isDead}");
+                            Console.WriteLine($"   {j + 1}. {fighters[j].Name} (AC {fighters[j].Armor.Armor}) {yourCharacter + deadCharacter}");
                         }
-                        string opponentNumStr = Console.ReadLine();
-                        int opponentNum = int.Parse(opponentNumStr) - 1;
-                        fighters[opponentNum].Dead = FigthAndCheckIfOpponentDead(fighters[i], fighters[opponentNum]);
+                        int opponentNum = int.Parse(Console.ReadLine()) - 1;
+                        while (opponentNum < 0 || opponentNum >= fighters.Count)
+                        {
+                            Console.WriteLine("No fighter with that index, enter again");
+                            opponentNum = int.Parse(Console.ReadLine()) - 1;
+                        }
+                        fighters[opponentNum].Dead = Figth(fighters[i], fighters[opponentNum]);
                         if (fighters[opponentNum].Dead) 
                         { 
                             alivePlayers.Remove(opponentNum); 
@@ -131,26 +135,26 @@ namespace Fighters
         {
             return Convert.ToInt32(Math.Floor((attribute - 10) / 2.0));
         }
-        private bool FigthAndCheckIfOpponentDead(Fighter player, Fighter opponent)
+        private bool Figth(Fighter player, Fighter opponent)
         {
-            int D20Roll = player.D20RollDice.Roll();
-            int RollWithBonus = D20Roll + Bonus(player.Attributes.Dexterity);
+            int d20Roll = player.D20RollDice.Roll();
+            int rollWithBonus = d20Roll + Bonus(player.Attributes.Dexterity);
             int damage = player.CalculateDamage();
-            if (RollWithBonus < opponent.Armor.Armor)
+            if (rollWithBonus < opponent.Armor.Armor)
             {
-                if (D20Roll == 1)
+                if (d20Roll == 1)
                 {
                     Console.WriteLine("Critical miss!");
                 }
                 else
                 {
-                    Console.WriteLine($"You missed! ({RollWithBonus} rolled)");
+                    Console.WriteLine($"You missed! ({rollWithBonus} rolled)");
                 }
                 damage = 0;
             }
             else
             {
-                if (D20Roll == 20)
+                if (d20Roll == 20)
                 {
                     Console.WriteLine("Critical hit!");
                     damage += player.CalculateDamage();

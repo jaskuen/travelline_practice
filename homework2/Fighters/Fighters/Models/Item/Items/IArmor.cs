@@ -24,7 +24,7 @@
     public class HeavyIronArmor : IArmor
     {
         public string Name { get; } = "Heavy iron armor (18 AC)";
-        public int Armor { get; set; } = 12;
+        public int Armor { get; set; } = 18;
     }
     public class Armors
     {

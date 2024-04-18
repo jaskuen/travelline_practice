@@ -5,74 +5,75 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Fighters.Models.Item.Items;
+using Fighters.Functions;
+using Fighters.Models.Item;
 
 namespace Fighters.Models.ChooseItems
 {
     internal class Choose
     {
-        public IRace Race()
-        {
-            Console.Clear();
-            Console.WriteLine("Choose one of the following race: ");
-            var raceList = new Races().List;
-            for (int i = 0; i < raceList.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {raceList[i].Name}");
-            }
-            string raceNumStr = Console.ReadLine();
-
-            return raceList[Int32.Parse(raceNumStr) - 1];
-        }
-        public IClass Class()
-        {
-            Console.Clear();
-            Console.WriteLine("Choose one of the following class: ");
-            var classList = new Classes().List;
-            for (int i = 0; i < classList.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {classList[i].Name}");
-            }
-            string classNumStr = Console.ReadLine();
-
-            return classList[Int32.Parse(classNumStr) - 1];
-        }
         public int Level()
         {
             Console.Clear();
+            Console.WriteLine("Enter character level:");
             int result = 0;
-            while (result < 1)
+            while (!Int32.TryParse(Console.ReadLine(), out result) || result < 1)
             {
-                Console.WriteLine("Enter character level:");
-                string levelStr = Console.ReadLine();
-                return int.Parse(levelStr);
+                Console.WriteLine("Wrong number");
             }
-            throw new UnreachableException();
+            return result;
         }
-        public IWeapon Weapon()
+        public int ChooseItem(string itemName)
         {
-            Console.Clear();
-            Console.WriteLine("Choose one of the following weapon: ");
-            var weaponList = new Weapons().List;
-            for (int i = 0; i < weaponList.Count; i++)
+            List<string> itemNamesList = new List<string>();
+            switch (itemName)
             {
-                Console.WriteLine($"{i + 1}. {weaponList[i].Name}");
+                case "armor":
+                    List<IArmor> armorList = new Armors().List;
+                    foreach (IArmor armor in armorList)
+                    {
+                        itemNamesList.Add(armor.Name);
+                    }
+                    break;
+                case "race":
+                    List<IRace> raceList = new Races().List;
+                    foreach (IRace race in raceList)
+                    {
+                        itemNamesList.Add(race.Name);
+                    }
+                    break;
+                case "class":
+                    List<IClass> classList = new Classes().List;
+                    foreach (IClass classs in classList)
+                    {
+                        itemNamesList.Add(classs.Name);
+                    }
+                    break;
+                case "weapon":
+                    List<IWeapon> weaponList = new Weapons().List;
+                    foreach (IWeapon weapon in weaponList)
+                    {
+                        itemNamesList.Add(weapon.Name);
+                    }
+                    break;
             }
-            string weaponNumStr = Console.ReadLine();
-
-            return weaponList[Int32.Parse(weaponNumStr) - 1];
+            Console.Clear();
+            Console.WriteLine($"Choose one of the foolowing {itemName}:");
+            int result = MakeChoice(itemNamesList);
+            while (result >= itemNamesList.Count || result < 0)
+            {
+                Console.WriteLine("Incorrect number entered");
+                result = MakeChoice(itemNamesList);
+            }
+            return result;
         }
-        public IArmor Armor()
+        private int MakeChoice(List<string> items)
         {
-            Console.Clear();
-            Console.WriteLine("Choose one of the following armor: ");
-            var armorList = new Armors().List;
-            for (int i = 0; i < armorList.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {armorList[i].Name}");
+                Console.WriteLine($"{i + 1}. {items[i]}");
             }
-            string armorNumStr = Console.ReadLine();
-
-            return armorList[Int32.Parse(armorNumStr) - 1];
+            return Functions.Functions.ConsoleRead() - 1;
         }
     }
 }
