@@ -1,0 +1,30 @@
+.button {
+    background: #1E65B7;
+    height: 32px;
+    max-width: max-content;
+    padding-inline: 40px;
+    padding-block: 8px 7px;
+    gap: 10px;
+    opacity: 0px;
+    border: 1px solid #DCDCDC;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    letter-spacing: 0.015em;
+    text-align: left;
+}
+
+.button:hover {
+    background: #0B51A3;
+}
+
+.button:active {
+    background: #0B51A3;
+    box-shadow: 0px -2px 4px 0px #00000040 inset;
+}
+
+.button:disabled {
+    background: #C0C0C0;
+}

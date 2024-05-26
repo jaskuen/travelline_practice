@@ -1,0 +1,48 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    height: 30px;
+    width: 100%;
+    gap: 0px;
+    border: 1px solid #DCDCDC;
+    border-radius: 5px;
+    opacity: 0px;
+    padding-inline: 5.92px 7.08px;
+}
+.name {
+    position: absolute;
+    width: min-content;
+    height: 14px;
+    width: 32px;
+    top: -6px;
+    left: 5px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.1px;
+    letter-spacing: 0.015em;
+    text-align: center;
+    color: #909090;
+    background: #FFFFFF;
+    padding: 1.41px 3px -0.59px 2px;
+}
+.inputField {
+    resize: none;
+    margin-block-start: 5px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    letter-spacing: 0.015em;
+    text-align: left;
+}
+
+.feedback {
+    height: 113px;
+}
