@@ -1,0 +1,23 @@
+:root {
+  width: 1280px;
+  height: 720px;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  margin-block: auto;
+  min-width: 1000px;
+  min-height: 720px;
+  background: #EBF4FB;
+  display: flex;
+  align-items: center;
+}
+
+.exchanger {
+  min-height: 500px;
+  width: 1000px;
+  margin-inline: 80px;
+  background: #FFFFFF;
+}
+
