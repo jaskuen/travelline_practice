@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { CurrencySelector, CurrencySelectorProps } from "../../components/CurrencySelector/CurrencySelector";
 import { generateUID, getCurrencyExchangeRates, getCurrencyInformation } from "../../functions/functions";
-import { CurrencyExchangeRateType, CurrencyObjectType, CurrencyPair, RateChartProps } from "../../types/types";
+import { CurrencyExchangeRateType, CurrencyObjectType, CurrencyPair, CurrencyPairWithPrice, RateChartProps } from "../../types/types";
 import styles from "./CurrencyCalculator.module.css"
 import { AboutField, AboutFieldProps } from "../../components/AboutField/AboutField";
 import { Loader } from "../Loader/Loader";
 import { ServerError } from "../ServerError/ServerError";
 import { RateChart} from "../../components/RateChart/RateChart";
+import { Filters, FiltersProps } from "../Filters/Filters";
 
 type pageLoaderType = "loading" | "success" | "error"
 
@@ -15,18 +16,21 @@ const CurrencyCalculator = () => {
     const [currencyList, setCurrencyList] = useState<Array<CurrencyObjectType>>([])
     const [paymentInputValue, setPaymentInputValue] = useState<number>(1)
     const [purchasedInputValue, setPurchasedInputValue] = useState<number>(1)
-    const [currencyPair, setCurrencyPair] = useState<CurrencyPair>({
+    const [currencyPair, setCurrencyPair] = useState<CurrencyPairWithPrice>({
         paymentCurrencyCode: "PLN",
         purchasedCurrencyCode: "JPY",
         price: 1,
     })
     const [exchangeRate, setExchangeRate] = useState<Array<CurrencyExchangeRateType>>([])
     const [chartProps, setChartProps] = useState<RateChartProps>()
+
+    const purchasedCurrencyCodeRef = useRef<string>(currencyPair.purchasedCurrencyCode)
+    const paymentCurrencyCodeRef = useRef<string>(currencyPair.paymentCurrencyCode)
     
     useEffect(() => {
         try {
             getCurrencyInformation(setCurrencyList)
-            getCurrencyExchangeRates(currencyPair.paymentCurrencyCode, currencyPair.purchasedCurrencyCode, setExchangeRate)
+            getCurrencyExchangeRates(paymentCurrencyCodeRef.current, purchasedCurrencyCodeRef.current, setExchangeRate)
         }
         catch (error) {
             console.log(error)
@@ -34,7 +38,7 @@ const CurrencyCalculator = () => {
         }
         finally {
             setInterval(() => {
-                getCurrencyExchangeRates(currencyPair.paymentCurrencyCode, currencyPair.purchasedCurrencyCode, setExchangeRate)
+                getCurrencyExchangeRates(paymentCurrencyCodeRef.current, purchasedCurrencyCodeRef.current, setExchangeRate)
             }, 10000)
             setTimeout(() => {
                 setPageLoaded("success")
@@ -44,17 +48,19 @@ const CurrencyCalculator = () => {
     }, [])
 
     useEffect(() => {
+        paymentCurrencyCodeRef.current = currencyPair.paymentCurrencyCode;
+        purchasedCurrencyCodeRef.current = currencyPair.purchasedCurrencyCode;
         getCurrencyExchangeRates(currencyPair.paymentCurrencyCode, currencyPair.purchasedCurrencyCode, setExchangeRate)
     }, [currencyPair.paymentCurrencyCode, currencyPair.purchasedCurrencyCode])
 
     useEffect(() => {
-        exchangeRate?.[0]?.price ? setPurchasedInputValue(paymentInputValue * exchangeRate[exchangeRate.length - 1].price) : null
+        exchangeRate?.[exchangeRate.length - 1]?.price ? setPurchasedInputValue(paymentInputValue * exchangeRate[exchangeRate.length - 1].price) : null
         setChartProps({
             id: generateUID(),
             rateData: {
                     labels: exchangeRate.map(rate => {return rate.dateTime}),
                     datasets: [{
-                        label: `${currencyPair.purchasedCurrencyCode}/${currencyPair.paymentCurrencyCode}`,
+                        label: '',
                         data: exchangeRate.map(rate => {return rate.price}),
                         fill: true,
                         backgroundColor: 'rgba(75,192,192,0.2)',
@@ -62,11 +68,12 @@ const CurrencyCalculator = () => {
                 }]
             }
         })
+        console.log(currencyPair.purchasedCurrencyCode, currencyPair.paymentCurrencyCode)
         setCurrencyPair({
             ...currencyPair,
             price: exchangeRate?.[exchangeRate.length - 1]?.price ?? 1,
         })
-    }, [exchangeRate])
+    }, [exchangeRate, paymentCurrencyCodeRef.current, purchasedCurrencyCodeRef.current])
 
     const paymentProps: CurrencySelectorProps = {
         id: generateUID(),
@@ -107,6 +114,15 @@ const CurrencyCalculator = () => {
         purchasedCurrency: currencyList.length > 0 ? currencyList.find(currency => currency.code == currencyPair.purchasedCurrencyCode) : undefined,
         paymentCurrency: currencyList.length > 0 ?currencyList.find(currency => currency.code == currencyPair.paymentCurrencyCode) : undefined,
     }
+    const filterProps: FiltersProps = {
+        id: generateUID(),
+        currentPair: currencyPair,
+        onFilterClick: (filter: CurrencyPair) => setCurrencyPair({
+            ...currencyPair,
+            paymentCurrencyCode: filter.paymentCurrencyCode,
+            purchasedCurrencyCode: filter.purchasedCurrencyCode,
+        }),
+    }
     return (
         <>
             {
@@ -129,6 +145,7 @@ const CurrencyCalculator = () => {
                     </div>
                     <RateChart {...chartProps}/>
                 </div>
+                <Filters {...filterProps}/>
                 <AboutField {...aboutProps}/>
             </div>
             }

@@ -7,7 +7,9 @@ import {
     Title,
     Tooltip,
     Legend, ChartData,
-    Point
+    Point,
+    TooltipItem,
+    Chart
   } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { generateUID, joinClassName } from "../../functions/functions"
@@ -70,7 +72,15 @@ const RateChart = (props: RateChartProps) => {
                     display: false,
                 }
             }
-        }
+        },
+        tooltips: {
+            enabled: true,
+            callbacks: {
+              label: function(tooltipItem: TooltipItem<'line'>, data: ChartData) {
+                return tooltipItem.formattedValue;
+              }
+            }
+          }
     }
 
     return (

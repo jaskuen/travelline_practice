@@ -1,14 +1,13 @@
 :root {
-  width: 1280px;
-  height: 720px;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
 }
 
 .wrapper {
   margin-block: auto;
-  min-width: 1000px;
-  min-height: 720px;
+  width: 100%;
+  height: 100%;
   background: #EBF4FB;
   display: flex;
   align-items: center;

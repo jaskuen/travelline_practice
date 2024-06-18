@@ -10,14 +10,14 @@ type CurrencyObjectType = {
 type CurrencyPair = {
     purchasedCurrencyCode: string,
     paymentCurrencyCode: string,
+}
+
+type CurrencyPairWithPrice = CurrencyPair & {
     price: number,
 }
 
-type CurrencyExchangeRateType = {
+type CurrencyExchangeRateType = CurrencyPairWithPrice & {
     dateTime: string,
-    purchasedCurrencyCode: string,
-    paymentCurrencyCode: string,
-    price: number,
 }
 
 type RateChartProps = {
@@ -31,4 +31,5 @@ export type {
     CurrencyExchangeRateType,
     RateChartProps,
     CurrencyPair,
+    CurrencyPairWithPrice,
 }
