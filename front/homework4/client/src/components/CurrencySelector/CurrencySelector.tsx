@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { joinClassName } from "../../functions/functions"
 import styles from "./CurrencySelector.module.css"
 
