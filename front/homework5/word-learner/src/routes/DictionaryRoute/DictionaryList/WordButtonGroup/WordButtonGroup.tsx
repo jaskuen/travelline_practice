@@ -22,12 +22,14 @@ const WordButtonGroup = (props: WordButtonGroupProps) => {
         <Button 
             key="edit" 
             startIcon={<Edit />} 
+            variant="contained"
             onClick={() => {
                 navigator("/edit-word", editWordRouteProps)
             }}>Редактировать</Button>,
         <Button 
             key="delete" 
             startIcon={<Delete />} 
+            variant="contained"
             onClick={() => {
                 deleteWord(wordId)
             }}>Удалить</Button>

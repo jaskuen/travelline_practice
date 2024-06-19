@@ -4,6 +4,12 @@ type WordType = {
     english: string,
 }
 
+type QuizQuestion = {
+    word: WordType,
+    possibleTranslates: Array<string>,
+}
+
 export type {
     WordType,
+    QuizQuestion,
 }

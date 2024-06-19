@@ -1,5 +1,6 @@
 @use "../../../styles/styles.scss" as *;
 
 .wrapper {
-    padding-block-start: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(72, 135, 202, 0.8) 0 0 90px 33px;
 }
