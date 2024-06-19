@@ -6,29 +6,38 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { IconButton } from "@mui/material";
+import { IconButton, Popper } from "@mui/material";
 import { Reorder } from "@mui/icons-material";
-
-type ActionsType = {
-    name: string,
-}
+import { useEffect, useState } from "react";
+import { WordButtonGroup } from "./WordButtonGroup/WordButtonGroup";
+import { useWordStore } from "../../../functions/functions";
+import { WordType } from "../../../types/types";
 
 const createData = (
+    id: string,
     russian: string,
     english: string,
-    actions: ActionsType,
 ) => {
-    return { russian, english, actions }
+    return { id, russian, english }
 }
 
-//const rows = ...      использование local storage
-const rows = [
-    createData('кот', 'cat', {name: "catt"}),
-    createData('мяч', 'ball', {name: "balll"}),
-    createData('машина', 'car', {name: "carr"}),
-]
-
 const DictionaryList = () => {
+    const {words} = useWordStore()
+    const [rows, setRows] = useState<Array<WordType>>([])
+    const [openedPopperId, setOpenedPopperId] = useState<string | null>(null)
+
+    const handleClick = (wordId: string) => {
+        setOpenedPopperId(openedPopperId === wordId ? null : wordId)
+    }
+
+    useEffect(() => {
+        setRows(words.map(word => 
+            createData(
+                word.id, 
+                word.russian, 
+                word.english,
+            )))
+    }, [words])
     return (
         <div className={styles.wrapper}>
             <TableContainer component={Paper}>
@@ -41,22 +50,29 @@ const DictionaryList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.russian}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.russian}
-                                </TableCell>
-                                <TableCell align="right">{row.english}</TableCell>
-                                <TableCell align="right">
-                                    <IconButton aria-label="more" onClick={() => {}}>
-                                        <Reorder />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {rows.map((row) => {
+                            
+                            return (
+                                <TableRow
+                                    key={row.id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.russian}
+                                    </TableCell>
+                                    <TableCell align="right">{row.english}</TableCell>
+                                    <TableCell align="right" className={styles.iconButton}>
+                                        <IconButton id={row.id} aria-label="more" onClick={() => handleClick(row.id)}>
+                                            <Reorder />
+                                        </IconButton>
+                                        {openedPopperId === row.id && (
+                                            <Popper open={true} anchorEl={document.getElementById(row.id)}>
+                                                <WordButtonGroup wordId={row.id}/>
+                                            </Popper>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            )})}
                     </TableBody>
                 </Table>
             </TableContainer>

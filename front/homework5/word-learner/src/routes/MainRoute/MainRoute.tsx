@@ -1,10 +1,10 @@
 import styles from "./MainRoute.module.scss"
 import { Button } from "@mui/material"
 import { Typography } from "@mui/material"
-import { useSwitchRoute } from "../../functions/functions"
+import { useNavigate } from "react-router-dom"
 
 const MainRoute = () => {
-    const navigate = useSwitchRoute()
+    const navigate = useNavigate()
 
     return (
         <div className={styles.wrapper}>

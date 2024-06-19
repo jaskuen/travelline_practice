@@ -6,6 +6,10 @@ import {
 } from "react-router-dom";
 import { MainRoute } from './routes/MainRoute/MainRoute';
 import { DictionaryRoute } from './routes/DictionaryRoute/DictionaryRoute';
+import { NewWordRoute } from './routes/NewWordRoute/NewWordRoute';
+import { EditWordRoute } from './routes/EditWordRoute/EditWordRoute';
+import { CheckRoute } from './routes/CheckRoute/CheckRoute';
+import { ResultRoute } from './routes/ResultRoute/ResultRoute';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +19,22 @@ const router = createBrowserRouter([
   {
     path: "/dictionary",
     element: <DictionaryRoute />
+  },
+  {
+    path: "/new-word",
+    element: <NewWordRoute />
+  },
+  {
+    path: "/edit-word",
+    element: <EditWordRoute />
+  },
+  {
+    path: "/check",
+    element: <CheckRoute />
+  },
+  {
+    path: "/result",
+    element: <ResultRoute />
   }
 ]);
 

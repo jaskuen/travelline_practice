@@ -1,0 +1,11 @@
+@use "../../styles/styles.scss" as *;
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    .header {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+}
