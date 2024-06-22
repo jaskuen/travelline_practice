@@ -55,5 +55,17 @@ namespace CarFactory.Factories.Cars
             Transmission = transmission;
         }
 
+        public string ToString()
+        {
+            return $"""
+                        Name: {Name}
+                        Model: {Model.Name}
+                        Body: {Body.Name}
+                        Color: {Color.Name}
+                        Engine: {Engine.Name}
+                        Transmission: {Transmission.Name}
+                    """;
+        }
+
     }
 }
