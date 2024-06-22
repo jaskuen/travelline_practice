@@ -137,12 +137,12 @@ namespace Fighters
         }
         private bool Figth(Fighter player, Fighter opponent)
         {
-            int d20Roll = player.D20RollDice.Roll();
-            int rollWithBonus = d20Roll + Bonus(player.Attributes.Dexterity);
+            int d20RollResult = player.D20RollDice.Roll();
+            int rollWithBonus = d20RollResult + Bonus(player.Attributes.Dexterity);
             int damage = player.CalculateDamage();
             if (rollWithBonus < opponent.Armor.Armor)
             {
-                if (d20Roll == 1)
+                if (d20RollResult == 1)
                 {
                     Console.WriteLine("Critical miss!");
                 }
@@ -154,7 +154,7 @@ namespace Fighters
             }
             else
             {
-                if (d20Roll == 20)
+                if (d20RollResult == 20)
                 {
                     Console.WriteLine("Critical hit!");
                     damage += player.CalculateDamage();
