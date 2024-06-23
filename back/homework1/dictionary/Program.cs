@@ -1,80 +1,98 @@
-﻿//сейчас программа уязвима к множественным пробелам между словами
+﻿// TODO: сейчас программа уязвима к множественным пробелам между словами
+using System.Text.RegularExpressions;
+
 var dictionary = new Dictionary<string, string>();
 
-string addTranslation = "AddTranslation";
-string removeTranslation = "RemoveTranslation";
-string changeTranslation = "ChangeTranslation";
-string translate = "Translate";
+string CommandAddTranslation = "addtranslation";
+string CommandRemoveTranslation = "removetranslation";
+string CommandChangeTranslation = "changetranslation";
+string CommandTranslate = "translate";
+string CommandExit = "exit";
 
 Console.WriteLine("Русско-английский словарь.");
+Console.WriteLine("Пробел разделяет команды и разные слова, вместо пробела для слов используется символ _");
 Console.WriteLine("Список команд: " +
-                  $"\n\r{addTranslation} <русский> <английский> - добавить перевод слова" +
-                  $"\n\r{removeTranslation} <русский> - удалить перевод слова" +
-                  $"\n\r{changeTranslation} <русский> <английский> - изменить перевод уже существующего слова" +
-                  $"\n\r{translate} <русский> - перевести слово");
+                  $"\n\r{CommandAddTranslation} <русский> <английский> - добавить перевод слова" +
+                  $"\n\r{CommandRemoveTranslation} <русский> - удалить перевод слова" +
+                  $"\n\r{CommandChangeTranslation} <русский> <английский> - изменить перевод уже существующего слова" +
+                  $"\n\r{CommandTranslate} <русский> - перевести слово" +
+                  $"\n\r{CommandExit} - выйти из программы");
 
-string userRequest = null;
-string command = null;
-string word1 = null;
-string word2 = null;
-while (true) //в следующей версии добавлю выход из цикла при нажатии Esc
+string userRequest;
+string command;
+string russianWord = "";
+string englishWord = "";
+bool usingDictionary = true;
+while (usingDictionary) 
 {
     userRequest = Console.ReadLine().Trim();
-    command = userRequest.ToLower().Substring(0, userRequest.IndexOf(' '));
-    userRequest = userRequest.Substring(userRequest.IndexOf(" ") + 1);
-    if (userRequest.IndexOf(" ") !=  -1)
+    MatchCollection matches = Regex.Matches(userRequest, @"\b[\w-]+(?:_\w+)*\b");
+    if (matches.Count >= 3)
     {
-        word1 = userRequest.Substring(0, userRequest.IndexOf(" "));
+        command = matches[0].Value.ToLower();
+        russianWord = matches[1].Value.ToLower();
+        englishWord = matches[2].Value.ToLower();
     }
-    else { word1 = userRequest.Trim(); }
-    if (command == addTranslation.ToLower())
+    else if (matches.Count >= 2)
     {
-        word2 = userRequest.Substring(userRequest.IndexOf(" "));
-        if (!dictionary.ContainsKey(word1))
+        command = matches[0].Value.ToLower();
+        russianWord = matches[1].Value.ToLower();
+    }
+    else
+    {
+        command = matches[0].Value.ToLower();
+    }
+
+    if (command == CommandAddTranslation)
+    {
+        if (!dictionary.ContainsKey(russianWord))
         {
-            dictionary.Add(word1, word2);
+            dictionary.Add(russianWord, englishWord);
             Console.WriteLine("Успешно!");
         }
         else 
         {
-            Console.WriteLine($"{word1} уже есть в словаре, его перевод - {word2}");
+            Console.WriteLine($"{russianWord} уже есть в словаре, его перевод - {englishWord}");
         }
     }
-    else if (command == removeTranslation.ToLower()) 
+    else if (command == CommandRemoveTranslation) 
     {
-        if (dictionary.ContainsKey(word1))
+        if (dictionary.ContainsKey(russianWord))
         {
-            dictionary.Remove(word1);
+            dictionary.Remove(russianWord);
             Console.WriteLine("Успешно!");
         }
         else
         {
-            Console.WriteLine($"{word1} отсутствует в словаре");
+            Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
     }
-    else if (command == changeTranslation.ToLower()) 
+    else if (command == CommandChangeTranslation) 
     {
-        word2 = userRequest.Substring(userRequest.IndexOf(" "));
-        if (dictionary.ContainsKey(word1))
+        if (dictionary.ContainsKey(russianWord))
         {
-            dictionary[word1] = word2;
+            dictionary[russianWord] = englishWord;
             Console.WriteLine("Успешно!");
         }
         else
         {
-            Console.WriteLine($"{word1} отсутствует в словаре");
+            Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
     }
-    else if (command == translate.ToLower())
+    else if (command == CommandTranslate)
     {
-        if (dictionary.ContainsKey(word1))
+        if (dictionary.ContainsKey(russianWord))
         {
-            Console.WriteLine($"{word1} переводится как {dictionary[word1]}");
+            Console.WriteLine($"{russianWord} переводится как {dictionary[russianWord]}");
         }
         else
         {
-            Console.WriteLine($"{word1} отсутствует в словаре");
+            Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
+    }
+    else if (command == CommandExit.ToLower())
+    {
+        usingDictionary = false;
     }
     else { Console.WriteLine("Данная команда не найдена"); }
 }
