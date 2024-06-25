@@ -53,15 +53,15 @@ public static class AccommodationsProcessor
                     return;
                 }
 
-                if (!Enum.TryParse(parts[5], true, out CurrencyDto currency)) // Ïàðñèì âàëþòó
+                if (!Enum.TryParse(parts[5], true, out CurrencyDto currency)) // Ð¿Ð°Ñ€ÑÐ¸Ð¼ Ð²Ð°Ð»ÑŽÑ‚Ñƒ
                 {
                     throw new ArgumentException("Wrong currency was entered");
                 }
-                if (!DateTime.TryParse(parts[3], out DateTime sDate)) // Ïàðñèì íà÷àëüíóþ äàòó
+                if (!DateTime.TryParse(parts[3], out DateTime startDate)) // Ð¿Ð°Ñ€ÑÐ¸Ð¼ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ
                 {
                     throw new ArgumentException("Date of the book beginning is incorrect");
                 }
-                if (!DateTime.TryParse(parts[4], out DateTime eDate)) // Ïàðñèì êîíå÷íóþ äàòó
+                if (!DateTime.TryParse(parts[4], out DateTime endDate)) // Ð¿Ð°Ñ€ÑÐ¸Ð¼ ÐºÐ¾Ð½ÐµÑ‡Ð½ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ
                 {
                     throw new ArgumentException("Date of the book ending is incorrect");
                 }
@@ -70,8 +70,8 @@ public static class AccommodationsProcessor
                 {
                     UserId = int.Parse(parts[1]),
                     Category = parts[2],
-                    StartDate = sDate,
-                    EndDate = eDate,
+                    StartDate = startDate,
+                    EndDate = endDate,
                     Currency = currency,
                 };
 
@@ -96,10 +96,17 @@ public static class AccommodationsProcessor
                 break;
 
             case "undo":
-                _executedCommands[s_commandIndex].Undo();
-                _executedCommands.Remove(s_commandIndex);
-                s_commandIndex--;
-                Console.WriteLine("Last command undone.");
+                if (_executedCommands.Count > 0)
+                {
+                    _executedCommands[s_commandIndex].Undo();
+                    _executedCommands.Remove(s_commandIndex);
+                    s_commandIndex--;
+                    Console.WriteLine("Last command undone.");
+                }
+                else
+                {
+                    Console.WriteLine("There are no commands to undone");
+                }
 
                 break;
             case "find":
@@ -119,10 +126,10 @@ public static class AccommodationsProcessor
                     Console.WriteLine("Invalid arguments for 'search'. Expected format: 'search <StartDate> <EndDate> <CategoryName>'");
                     return;
                 }
-                DateTime startDate = DateTime.Parse(parts[1]);
-                DateTime endDate = DateTime.Parse(parts[2]);
+                DateTime dateStart = DateTime.Parse(parts[1]);
+                DateTime dateEnd = DateTime.Parse(parts[2]);
                 string categoryName = parts[3];
-                SearchBookingsCommand searchCommand = new(_bookingService, startDate, endDate, categoryName);
+                SearchBookingsCommand searchCommand = new(_bookingService, dateStart, dateEnd, categoryName);
                 searchCommand.Execute();
                 break;
 
