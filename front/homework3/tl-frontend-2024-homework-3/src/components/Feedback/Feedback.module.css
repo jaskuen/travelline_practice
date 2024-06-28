@@ -1,0 +1,49 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    margin-block: 35px;
+    margin-inline: 658px;
+    
+    color: #404040;
+}
+
+.userIcon {
+    width: 50px;
+    height: 50px;
+}
+
+.nameAndText {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.name {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    letter-spacing: 0.015em;
+    text-align: left;
+}
+
+.text {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    letter-spacing: 0.015em;
+    text-align: left;
+}
+
+.rate {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29.05px;
+    letter-spacing: 0.015em;
+    text-align: left;
+
+}

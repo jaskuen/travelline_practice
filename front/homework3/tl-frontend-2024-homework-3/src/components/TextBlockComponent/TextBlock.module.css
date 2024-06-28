@@ -1,0 +1,9 @@
+.textBlock {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29.05px;
+    letter-spacing: 0.015em;
+    text-align: left;
+    margin-block-end: 32px;
+}
