@@ -1,0 +1,39 @@
+.wrapper {
+    min-width: 500px;
+    height: 40px;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    margin-block: 10px;
+}
+
+.input {
+    border: none;
+    padding-inline: 10px;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.divider {
+    width: 1px;
+    height: 34px;
+    background: #DCDCDC;
+    margin-block: auto;
+}
+
+.select {
+    border: none;
+    width: 100%;
+    margin-inline: 10px;
+}
+
+.select::after {
+    border: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
