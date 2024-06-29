@@ -1,22 +1,18 @@
 ﻿// TODO: сейчас программа уязвима к множественным пробелам между словами
 using System.Text.RegularExpressions;
+using dictionary.DictionaryCommandsList;
 
-var dictionary = new Dictionary<string, string>();
+Dictionary<string, string> wordsDictionary = new();
 
-string CommandAddTranslation = "addtranslation";
-string CommandRemoveTranslation = "removetranslation";
-string CommandChangeTranslation = "changetranslation";
-string CommandTranslate = "translate";
-string CommandExit = "exit";
 
 Console.WriteLine("Русско-английский словарь.");
 Console.WriteLine("Пробел разделяет команды и разные слова, вместо пробела для слов используется символ _");
 Console.WriteLine("Список команд: " +
-                  $"\n\r{CommandAddTranslation} <русский> <английский> - добавить перевод слова" +
-                  $"\n\r{CommandRemoveTranslation} <русский> - удалить перевод слова" +
-                  $"\n\r{CommandChangeTranslation} <русский> <английский> - изменить перевод уже существующего слова" +
-                  $"\n\r{CommandTranslate} <русский> - перевести слово" +
-                  $"\n\r{CommandExit} - выйти из программы");
+                  $"\n\r{DictionaryCommandList.CommandAddTranslation} <русский> <английский> - добавить перевод слова" +
+                  $"\n\r{DictionaryCommandList.CommandRemoveTranslation} <русский> - удалить перевод слова" +
+                  $"\n\r{DictionaryCommandList.CommandChangeTranslation} <русский> <английский> - изменить перевод уже существующего слова" +
+                  $"\n\r{DictionaryCommandList.CommandTranslate} <русский> - перевести слово" +
+                  $"\n\r{DictionaryCommandList.CommandExit} - выйти из программы");
 
 string userRequest;
 string command;
