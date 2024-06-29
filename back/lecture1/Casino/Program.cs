@@ -9,7 +9,8 @@ string betStr = null;
 int bet = 0;
 int randomNum = 0;
 int multiplicator = 100;
-List<int> Constants = [20, 18]; // [0] - максимально возможное число, [1] - минимальное выигрышное число
+const int MAX_ROLL_NUMBER = 20;
+const int MIN_WIN_NUMBER = 18;// [0] - максимально возможное число, [1] - минимальное выигрышное число
 while (balance > 0 && isPlaying)
 {
     Console.Write("Введите вашу ставку: ");
@@ -18,12 +19,11 @@ while (balance > 0 && isPlaying)
     {
         Console.WriteLine("Неправильный формат числа, попробуйте ещё раз!");
     }
-    bet = Int32.Parse(betStr);
-    randomNum = rnd.Next(Constants[0]) + 1;
-    if (randomNum >= Constants[1])
+    randomNum = rnd.Next(MAX_ROLL_NUMBER) + 1;
+    if (randomNum >= MIN_WIN_NUMBER)
     {
         Console.WriteLine($"Поздравляем, вы победили! Выпало число {randomNum}.");
-        balance += bet * (1 + ( randomNum * multiplicator % 17));
+        balance += bet * (1 + (randomNum * multiplicator % 17));
         Console.WriteLine($"Ваш выигрыш: {bet}.");
     }
     else
