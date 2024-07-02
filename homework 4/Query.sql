@@ -90,18 +90,35 @@ VALUES
 	(3, 8),
 	(5, 5), (5, 6), (5, 8)
 
-SELECT * FROM dbo.rooms WHERE (dbo.rooms.is_available = 1)
+// задание 1
+
+SELECT * FROM dbo.rooms AS r
+WHERE r.is_available = 1 AND NOT EXISTS (
+    SELECT 1
+    FROM dbo.bookings AS b
+    WHERE b.id_room = r.id_room
+    AND b.check_in_date <= GETDATE() // вместо GETDATE() можно указать необходимую дату
+    AND b.check_out_date >= GETDATE()
+);
+
+// задание 2
+
 SELECT * FROM dbo.customers WHERE(dbo.customers.last_name LIKE N'S%')
+
+// задание 3
 
 SELECT * FROM dbo.bookings AS booking
 	JOIN dbo.customers AS customer ON booking.id_customer = customer.id_customer
-	JOIN dbo.rooms AS room ON booking.id_room = room.id_room
 		WHERE customer.first_name = N'Игорь' AND customer.last_name = N'Пономарев' 
 			OR customer.email = 'igorponomarev@mail.ru';
+
+// задание 4
 
 SELECT * FROM dbo.bookings AS booking
 	JOIN dbo.rooms AS room ON room.id_room = booking.id_room
 		WHERE room.room_number = 21
+
+// задание 5
 
 SELECT * FROM dbo.rooms AS room
 WHERE NOT EXISTS (
