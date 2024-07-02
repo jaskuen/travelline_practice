@@ -1,9 +1,5 @@
-﻿namespace Fighters.Models.Item.Items
+﻿namespace Fighters.Models.Item.Items.Race
 {
-    public interface IRace : IItem
-    {
-        public int Armor { get; }
-    }
     public class Human : IRace
     {
         public string Name { get; set; } = "Human";
@@ -26,17 +22,6 @@
     {
         public string Name { get; set; } = "Dragonborn";
         public int Armor { get; } = 12;
-    }
-
-    public class Races
-    {
-        public List<IRace> List { get; } = new List<IRace>()
-        {
-            new Human(),
-            new Goblin(),
-            new Elf(),
-            new Dragonborn(),
-        };
     }
 }
 

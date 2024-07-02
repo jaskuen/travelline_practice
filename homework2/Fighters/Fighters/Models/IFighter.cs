@@ -1,6 +1,9 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Fighters.Models.Dice;
-using Fighters.Models.Item.Items;
+using Fighters.Models.Item.Items.Armor;
+using Fighters.Models.Item.Items.Class;
+using Fighters.Models.Item.Items.Race;
+using Fighters.Models.Item.Items.Weapon;
 
 namespace Fighters.Models
 {
@@ -31,18 +34,18 @@ namespace Fighters.Models
         public DiceRoll D20RollDice { get; private set; } = new DiceRoll(new D20(), 1);
         public int Initiative { get; set; } = 0;
         public bool Dead { get; set; } = false;
-        public Fighter(string name, IRace race, IClass _class, int level, IWeapon weapon, IArmor armor)
+        public Fighter(string name, IRace race, IClass @class, int level, IWeapon weapon, IArmor armor)
         {
             Name = name;
             Race = race;
-            Class = _class;
+            Class = @class;
             Level = level;
-            DiceRoll rollAttributes = new DiceRoll(new D4(), Level / 3); // за каждые 3 уровня будет кидаться кубик 1d4 на каждую характеристику
+            DiceRoll attributesDiceRoll = new DiceRoll(new D4(), Level / 3); // за каждые 3 уровня будет кидаться кубик 1d4 на каждую характеристику
             Attributes = new Attributes()
             {
-                Strength = 16 + rollAttributes.Roll(),
-                Dexterity = 15 + rollAttributes.Roll(),
-                Constitution = 13 + rollAttributes.Roll(),
+                Strength = 16 + attributesDiceRoll.Roll(),
+                Dexterity = 15 + attributesDiceRoll.Roll(),
+                Constitution = 13 + attributesDiceRoll.Roll(),
             };
             DiceRoll rollHealth = new DiceRoll(Class.HealthDice, Level - 1); // каждый новый уровень кидается кость хита персонажа
             MaxHealth = Class.HealthDice.DiceType + rollHealth.Roll(); // первый уровень - кол-во хитов равно макс значению кости хитов

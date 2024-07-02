@@ -1,9 +1,5 @@
-﻿namespace Fighters.Models.Item.Items
+﻿namespace Fighters.Models.Item.Items.Armor
 {
-    public interface IArmor : IItem
-    {
-        public int Armor { get; internal set; }
-    }
 
     public class NoArmor : IArmor
     {
@@ -26,14 +22,4 @@
         public string Name { get; } = "Heavy iron armor (18 AC)";
         public int Armor { get; set; } = 18;
     }
-    public class Armors
-    {
-        public List<IArmor> List { get; set; } = new List<IArmor>()
-            {
-                new NoArmor(),
-                new LeatherArmor(),
-                new LightIronArmor(),
-                new HeavyIronArmor(),
-            };
-    };
 }

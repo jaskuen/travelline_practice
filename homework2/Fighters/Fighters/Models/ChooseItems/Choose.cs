@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fighters.Models.Item.Items;
 using Fighters.Functions;
 using Fighters.Models.Item;
+using Fighters.Models.Item.Items.Armor;
+using Fighters.Models.Item.Items.Class;
+using Fighters.Models.Item.Items.Race;
+using Fighters.Models.Item.Items.Weapon;
 
 namespace Fighters.Models.ChooseItems
 {
@@ -29,15 +32,15 @@ namespace Fighters.Models.ChooseItems
             switch (itemName)
             {
                 case "armor":
-                    List<IArmor> armorList = new Armors().List;
-                    foreach (IArmor armor in armorList)
+                    List<Armor> armorList = new Armors().List;
+                    foreach (Armor armor in armorList)
                     {
                         itemNamesList.Add(armor.Name);
                     }
                     break;
                 case "race":
-                    List<IRace> raceList = new Races().List;
-                    foreach (IRace race in raceList)
+                    List<Race> raceList = new Races().List;
+                    foreach (Race race in raceList)
                     {
                         itemNamesList.Add(race.Name);
                     }
@@ -50,8 +53,8 @@ namespace Fighters.Models.ChooseItems
                     }
                     break;
                 case "weapon":
-                    List<IWeapon> weaponList = new Weapons().List;
-                    foreach (IWeapon weapon in weaponList)
+                    List<Weapon> weaponList = new Weapons().List;
+                    foreach (Weapon weapon in weaponList)
                     {
                         itemNamesList.Add(weapon.Name);
                     }
@@ -73,7 +76,7 @@ namespace Fighters.Models.ChooseItems
             {
                 Console.WriteLine($"{i + 1}. {items[i]}");
             }
-            return Functions.Functions.ConsoleRead() - 1;
+            return Functions.Tools.ConsoleRead() - 1;
         }
     }
 }

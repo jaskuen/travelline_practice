@@ -1,11 +1,7 @@
 ﻿using Fighters.Models.Dice;
 
-namespace Fighters.Models.Item.Items
+namespace Fighters.Models.Item.Items.Class
 {
-    public interface IClass : IItem
-    {
-        public IDice HealthDice { get; }
-    }
 
     public class Warrior : IClass
     {
@@ -21,15 +17,5 @@ namespace Fighters.Models.Item.Items
     {
         public string Name { get; } = "Ranger";
         public IDice HealthDice { get; } = new D6();
-    }
-
-    public class Classes
-    {
-        public List<IClass> List = new List<IClass>()
-        {
-            new Warrior(),
-            new Barbarian(),
-            new Ranger(),
-        };
     }
 }

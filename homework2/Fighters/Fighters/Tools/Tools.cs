@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fighters.Functions
+namespace Fighters.Tools
 {
-    internal class Functions
+    internal class Tools
     {
         public static int ConsoleRead()
         {

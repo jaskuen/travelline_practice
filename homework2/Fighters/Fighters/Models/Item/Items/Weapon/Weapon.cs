@@ -1,20 +1,7 @@
 ﻿using Fighters.Models.Dice;
 
-namespace Fighters.Models.Item.Items
+namespace Fighters.Models.Item.Items.Weapon
 {
-    public interface IWeapon : IItem
-    {
-        public IDice Dice { get; }
-        public int DiceCount { get; }
-        public int AttackBonus { get; set; }
-
-        public int GenerateDamage()
-        {
-            DiceRoll roll = new DiceRoll(Dice, DiceCount);
-            return roll.Roll();
-        }
-    }
-
     public class NoWeapon : IWeapon
     {
         public IDice Dice { get; } = new D4();
@@ -56,19 +43,6 @@ namespace Fighters.Models.Item.Items
         public int DiceCount { get; } = 1;
         public int AttackBonus { get; set; } = 0;
         public string Name { get; set; } = "Long bow (1d8)";
-    }
-
-    public class Weapons
-    {
-        public List<IWeapon> List = new List<IWeapon>
-        {
-            new NoWeapon(),
-            new ShortSword(),
-            new LongSword(),
-            new Dagger(),
-            new ShortBow(),
-            new LongBow(),
-        };
     }
 
 }

@@ -5,21 +5,27 @@ using System.Xml.Serialization;
 using Fighters.Models;
 using Fighters.Models.ChooseItems;
 using Fighters.Models.Item;
-using Fighters.Models.Item.Items;
+using Fighters.Models.Item.Items.Armor;
+using Fighters.Models.Item.Items.Class;
+using Fighters.Models.Item.Items.Race;
+using Fighters.Models.Item.Items.Weapon;
+using Fighters.Models.Item.List;
 
 namespace Fighters
 {
-    public class GetData
+    public class FighterFactory
     {
-        private Fighter CreateFighter(string name)
+        private Fighter CreateFighter()
         {
-            Choose choice = new Choose();
-            IRace race = new Races().List.ElementAt(choice.ChooseItem("race"));
-            IClass _class = new Classes().List.ElementAt(choice.ChooseItem("class"));
-            int level = choice.Level();
-            IWeapon weapon = new Weapons().List.ElementAt(choice.ChooseItem("weapon"));
-            IArmor armor = new Armors().List.ElementAt(choice.ChooseItem("armor"));
-            return new Fighter(name, race, _class, level, weapon, armor);
+            Choose choose = new Choose();
+            Console.WriteLine("Enter fighter name:");
+            string name = Console.ReadLine();
+            IRace race = Items.Races.ElementAt(choose.ChooseItem("race"));
+            IClass @class = Items.Classes.ElementAt(choose.ChooseItem("class"));
+            int level = choose.Level();
+            IWeapon weapon = Items.Weapons.ElementAt(choose.ChooseItem("weapon"));
+            IArmor armor = Items.Armors.ElementAt(choose.ChooseItem("armor"));
+            return new Fighter(name, race, @class, level, weapon, armor);
         }
         public List<Fighter> ReadFighters()
         {
@@ -30,9 +36,7 @@ namespace Fighters
             for (int i = 0; i < count; i++)
             {
                 Console.Clear();
-                Console.WriteLine($"Enter character {i + 1} name:");
-                string name = Console.ReadLine();
-                fighters.Add(CreateFighter(name));
+                fighters.Add(CreateFighter());
             }
             return fighters;
         }
@@ -70,7 +74,7 @@ namespace Fighters
         }
         public static void Main()
         {
-            List<Fighter> fighters = new GetData().ReadFighters();
+            List<Fighter> fighters = new FighterFactory().ReadFighters();
             var master = new GameMaster();
             Console.Clear();
 
