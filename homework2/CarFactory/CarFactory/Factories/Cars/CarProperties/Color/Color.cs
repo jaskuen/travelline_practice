@@ -1,9 +1,5 @@
-﻿namespace CarFactory.Factories.Cars.CarProperties
+﻿namespace CarFactory.Factories.Cars.CarProperties.Color
 {
-    public interface IColor
-    {
-        public string Name { get; }
-    }
     public class Red : IColor
     {
         public string Name { get; } = "Red";
@@ -19,16 +15,5 @@
     public class Green : IColor
     {
         public string Name { get; } = "Green";
-    }
-
-    public class ColorList
-    {
-        public List<IColor> ObjList = new List<IColor>()
-        {
-            new Red(),
-            new Blue(),
-            new White(),
-            new Green(),
-        };
     }
 }

@@ -1,6 +1,8 @@
-﻿using CarFactory.Choose;
+﻿using System.Xml.Linq;
+using CarFactory.Choose;
 using CarFactory.Factories.Cars;
 using CarFactory.Factories.Cars.CarProperties;
+using CarFactory.Factories.Cars.CarProperties.Model;
 
 namespace CarFactory.Factories
 {
@@ -8,15 +10,13 @@ namespace CarFactory.Factories
     {
         public Car CreateNewCar()
         {
-            ChooseProperty choice = new();
-            Car car = new();
-            Console.WriteLine("Enter car name:");
-            car.SetName(Console.ReadLine());
-            car.SetModel(choice.Choose(new ModelList()));
-            car.SetColor(choice.Choose(new ColorList()));
-            car.SetBody(choice.Choose(new BodyList()));
-            car.SetEngine(choice.Choose(new EngineList()));
-            car.SetTransmission(choice.Choose(new TransmissionList()));
+            CarPropertyFactory carPropertyFactory = new();
+            Car car = new(Console.ReadLine(),
+                carPropertyFactory.CreateModel(),
+                carPropertyFactory.CreateColor(),
+                carPropertyFactory.CreateBody(),
+                carPropertyFactory.CreateEngine(),
+                carPropertyFactory.CreateTransmission());
             return car;
         }
     }

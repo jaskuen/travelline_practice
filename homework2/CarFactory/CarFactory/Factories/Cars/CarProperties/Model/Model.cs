@@ -1,9 +1,5 @@
-﻿namespace CarFactory.Factories.Cars.CarProperties
+﻿namespace CarFactory.Factories.Cars.CarProperties.Model
 {
-    public interface IModel
-    {
-        public string Name { get; }
-    }
     public class Volvo : IModel
     {
         public string Name { get; } = "Volvo";
@@ -19,16 +15,5 @@
     public class Toyota : IModel
     {
         public string Name { get; } = "Toyota";
-    }
-
-    public class ModelList
-    {
-        public List<IModel> ObjList = new List<IModel>()
-        {
-            new Volvo(),
-            new Lada(),
-            new Mercedes(),
-            new Toyota(),
-        };
     }
 }

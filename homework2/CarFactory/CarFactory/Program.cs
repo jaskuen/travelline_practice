@@ -6,7 +6,7 @@ namespace CarFactory
     {
         public static void Main()
         {
-            var carsFactory = new CarsFactory();
+            CarsFactory carsFactory = new();
             List<Car> carList = [carsFactory.CreateNewCar()];
             string strIndex;
             int index;

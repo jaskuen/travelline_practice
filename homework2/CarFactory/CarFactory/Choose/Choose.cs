@@ -1,99 +1,103 @@
 ﻿using CarFactory.Factories.Cars;
-using CarFactory.Factories.Cars.CarProperties;
+using CarFactory.Factories.Cars.CarProperties.Body;
+using CarFactory.Factories.Cars.CarProperties.Color;
+using CarFactory.Factories.Cars.CarProperties.Engine;
+using CarFactory.Factories.Cars.CarProperties.Model;
+using CarFactory.Factories.Cars.CarProperties.Transmission;
 
 namespace CarFactory.Choose
 {
-    public class ChooseProperty
+    public static class ChooseByConsoleInput
     {
-        public IBody Choose(BodyList list)
+        public static IBody ChooseBody(List<IBody> list)
         {
             int index;
             string strIndex;
             Console.Clear();
-            Console.WriteLine("Choose body type from the following list:");
-            for (int i = 0; i < list.ObjList.Count; i++)
+            Console.WriteLine("Choose body type index from the following list:");
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {list.ObjList[i].Name}");
+                Console.WriteLine($"{i + 1}. {list[i].Name}");
             }
             do
             {
                 strIndex = Console.ReadLine();
                 index = int.Parse( strIndex );
             }
-            while (index <= 0 || index > list.ObjList.Count);
-            return list.ObjList[index - 1];
+            while (index <= 0 || index > list.Count);
+            return list[index - 1];
         }
-        public IColor Choose(ColorList list)
+        public static IColor ChooseColor(List<IColor> list)
         {
             int index;
             string strIndex;
             Console.Clear();
-            Console.WriteLine("Choose color from the following list:");
-            for (int i = 0; i < list.ObjList.Count; i++)
+            Console.WriteLine("Choose color index from the following list:");
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {list.ObjList[i].Name}");
+                Console.WriteLine($"{i + 1}. {list[i].Name}");
             }
             do
             {
                 strIndex = Console.ReadLine();
                 index = int.Parse(strIndex);
             }
-            while (index <= 0 || index > list.ObjList.Count);
-            return list.ObjList[index - 1];
+            while (index <= 0 || index > list.Count);
+            return list[index - 1];
         }
-        public IEngine Choose(EngineList list)
+        public static IEngine ChooseEngine(List<IEngine> list)
         {
             int index;
             string strIndex;
             Console.Clear();
-            Console.WriteLine("Choose engine from the following list:");
-            for (int i = 0; i < list.ObjList.Count; i++)
+            Console.WriteLine("Choose engine index from the following list:");
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {list.ObjList[i].Name}");
+                Console.WriteLine($"{i + 1}. {list[i].Name}");
             }
             do
             {
                 strIndex = Console.ReadLine();
                 index = int.Parse(strIndex);
             }
-            while (index <= 0 || index > list.ObjList.Count);
-            return list.ObjList[index - 1];
+            while (index <= 0 || index > list.Count);
+            return list[index - 1];
         }
-        public IModel Choose(ModelList list)
+        public static IModel ChooseModel(List<IModel> list)
         {
             int index;
             string strIndex;
             Console.Clear();
-            Console.WriteLine("Choose model from the following list:");
-            for (int i = 0; i < list.ObjList.Count; i++)
+            Console.WriteLine("Choose model index from the following list:");
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {list.ObjList[i].Name}");
+                Console.WriteLine($"{i + 1}. {list[i].Name}");
             }
             do
             {
                 strIndex = Console.ReadLine();
                 index = int.Parse(strIndex);
             }
-            while (index <= 0 || index > list.ObjList.Count);
-            return list.ObjList[index - 1];
+            while (index <= 0 || index > list.Count);
+            return list[index - 1];
         }
-        public ITransmission Choose(TransmissionList list)
+        public static ITransmission ChooseTransmission(List<ITransmission> list)
         {
             int index;
             string strIndex;
             Console.Clear();
-            Console.WriteLine("Choose transmission from the following list:");
-            for (int i = 0; i < list.ObjList.Count; i++)
+            Console.WriteLine("Choose transmission index from the following list:");
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {list.ObjList[i].Name}");
+                Console.WriteLine($"{i + 1}. {list[i].Name}");
             }
             do
             {
                 strIndex = Console.ReadLine();
                 index = int.Parse(strIndex);
             }
-            while (index <= 0 || index > list.ObjList.Count);
-            return list.ObjList[index - 1];
+            while (index <= 0 || index > list.Count);
+            return list[index - 1];
         }
     }
 }
