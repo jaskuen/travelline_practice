@@ -39,11 +39,11 @@ while (usingDictionary)
         command = matches[0].Value.ToLower();
     }
 
-    if (command == CommandAddTranslation)
+    if (command == DictionaryCommandList.CommandAddTranslation)
     {
-        if (!dictionary.ContainsKey(russianWord))
+        if (!wordsDictionary.ContainsKey(russianWord))
         {
-            dictionary.Add(russianWord, englishWord);
+            wordsDictionary.Add(russianWord, englishWord);
             Console.WriteLine("Успешно!");
         }
         else 
@@ -51,11 +51,11 @@ while (usingDictionary)
             Console.WriteLine($"{russianWord} уже есть в словаре, его перевод - {englishWord}");
         }
     }
-    else if (command == CommandRemoveTranslation) 
+    else if (command == DictionaryCommandList.CommandRemoveTranslation) 
     {
-        if (dictionary.ContainsKey(russianWord))
+        if (wordsDictionary.ContainsKey(russianWord))
         {
-            dictionary.Remove(russianWord);
+            wordsDictionary.Remove(russianWord);
             Console.WriteLine("Успешно!");
         }
         else
@@ -63,11 +63,11 @@ while (usingDictionary)
             Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
     }
-    else if (command == CommandChangeTranslation) 
+    else if (command == DictionaryCommandList.CommandChangeTranslation) 
     {
-        if (dictionary.ContainsKey(russianWord))
+        if (wordsDictionary.ContainsKey(russianWord))
         {
-            dictionary[russianWord] = englishWord;
+            wordsDictionary[russianWord] = englishWord;
             Console.WriteLine("Успешно!");
         }
         else
@@ -75,18 +75,18 @@ while (usingDictionary)
             Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
     }
-    else if (command == CommandTranslate)
+    else if (command == DictionaryCommandList.CommandTranslate)
     {
-        if (dictionary.ContainsKey(russianWord))
+        if (wordsDictionary.ContainsKey(russianWord))
         {
-            Console.WriteLine($"{russianWord} переводится как {dictionary[russianWord]}");
+            Console.WriteLine($"{russianWord} переводится как {wordsDictionary[russianWord]}");
         }
         else
         {
             Console.WriteLine($"{russianWord} отсутствует в словаре");
         }
     }
-    else if (command == CommandExit.ToLower())
+    else if (command == DictionaryCommandList.CommandExit)
     {
         usingDictionary = false;
     }
