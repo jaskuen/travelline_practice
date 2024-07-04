@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fighters.Functions;
+using Fighters.Tools;
 using Fighters.Models.Item;
 using Fighters.Models.Item.Items.Armor;
 using Fighters.Models.Item.Items.Class;
 using Fighters.Models.Item.Items.Race;
 using Fighters.Models.Item.Items.Weapon;
+using Fighters.Models.Item.List;
 
 namespace Fighters.Models.ChooseItems
 {
@@ -32,29 +33,29 @@ namespace Fighters.Models.ChooseItems
             switch (itemName)
             {
                 case "armor":
-                    List<Armor> armorList = new Armors().List;
-                    foreach (Armor armor in armorList)
+                    List<IArmor> armorList = Items.Armors;
+                    foreach (IArmor armor in armorList)
                     {
                         itemNamesList.Add(armor.Name);
                     }
                     break;
                 case "race":
-                    List<Race> raceList = new Races().List;
-                    foreach (Race race in raceList)
+                    List<IRace> raceList = Items.Races;
+                    foreach (IRace race in raceList)
                     {
                         itemNamesList.Add(race.Name);
                     }
                     break;
                 case "class":
-                    List<IClass> classList = new Classes().List;
-                    foreach (IClass classs in classList)
+                    List<IClass> classList = Items.Classes;
+                    foreach (IClass @class in classList)
                     {
-                        itemNamesList.Add(classs.Name);
+                        itemNamesList.Add(@class.Name);
                     }
                     break;
                 case "weapon":
-                    List<Weapon> weaponList = new Weapons().List;
-                    foreach (Weapon weapon in weaponList)
+                    List<IWeapon> weaponList = Items.Weapons;
+                    foreach (IWeapon weapon in weaponList)
                     {
                         itemNamesList.Add(weapon.Name);
                     }
@@ -76,7 +77,7 @@ namespace Fighters.Models.ChooseItems
             {
                 Console.WriteLine($"{i + 1}. {items[i]}");
             }
-            return Functions.Tools.ConsoleRead() - 1;
+            return Tools.Tools.ConsoleRead() - 1;
         }
     }
 }
