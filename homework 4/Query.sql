@@ -125,6 +125,5 @@ WHERE NOT EXISTS (
     SELECT 1
     FROM dbo.bookings AS booking
     WHERE booking.id_room = room.id_room 
-		AND room.is_available = 1
 		AND '2024-04-11T10:00:00' BETWEEN booking.check_in_date AND booking.check_out_date
-)
+) AND room.is_available = 1
