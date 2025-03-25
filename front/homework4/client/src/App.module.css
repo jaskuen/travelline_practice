@@ -1,0 +1,22 @@
+:root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.wrapper {
+  margin-block: auto;
+  width: 100%;
+  height: 100%;
+  background: #EBF4FB;
+  display: flex;
+  align-items: center;
+}
+
+.exchanger {
+  min-height: 500px;
+  width: 1000px;
+  margin-inline: 80px;
+  background: #FFFFFF;
+}
+

@@ -1,0 +1,12 @@
+.wrapper {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    margin-inline-start: 40px;
+    margin-block-start: 75px;
+}
+
+.chartWrapper {
+    width: 400px;
+    height: 300px;
+}

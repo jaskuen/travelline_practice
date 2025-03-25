@@ -1,0 +1,19 @@
+.wrapper {
+    max-width: 240px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.button {
+    max-height: 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #F2F3F5;
+}
+
+.arrow {
+    width: 20px;
+}

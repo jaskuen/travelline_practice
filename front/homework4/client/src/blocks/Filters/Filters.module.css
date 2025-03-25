@@ -1,0 +1,25 @@
+.wrapper {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.filtersWrapper {
+    width: 70%;
+    display: flex;
+    gap: 10px;
+}
+
+.filterButton {
+    border: 1px solid #000000;
+}
+
+.saveButton {
+    background-color: #3166D6;
+}
+
+.deleteButton {
+    background-color: #FB3F3B;
+}
